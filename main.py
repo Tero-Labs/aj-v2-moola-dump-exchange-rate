@@ -73,6 +73,7 @@ async def fetch_all(exchange_rate_reqs):
         # return responses
 
 def dump_data(api_url, params, method):
+    print(URL+api_url)
     asyncio.run(fetch(URL+api_url, params, method))
 
 def dump_coin_exchange_rate(coinName, network, usd_exchange_rate, celo_exchange_rate, cusd_exchange_rate, ceuro_exchange_rate, block_number):
