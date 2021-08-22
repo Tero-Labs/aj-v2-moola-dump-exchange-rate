@@ -12,6 +12,7 @@ setuptools.setup(
         "pycoingecko==2.0.0",
         "aiohttp==3.7.4",
         "asyncio==3.4.3",
+        "pytz==2021.1",
         "APScheduler==3.0.0"   
     ],
     classifiers=[
