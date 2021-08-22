@@ -21,10 +21,10 @@ coin_dict = {
 "ceuro": "cEUR"
 }
 
-kit = Kit('https://forno.celo.org')
+kit = Kit('https://alfajores-forno.celo-testnet.org')
 web3 = kit.w3
 eth = web3.eth
-helper_w3 = Kit('https://forno.celo.org').w3
+helper_w3 = Kit('https://alfajores-forno.celo-testnet.org').w3
 
 def get_latest_block(celo_mainnet_web3): 
     celo_mainnet_web3.middleware_onion.clear()
@@ -33,11 +33,11 @@ def get_latest_block(celo_mainnet_web3):
 
 coins_reserve_address = {
          "celo": '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
-         "cusd": '0x765DE816845861e75A25fCA122bb6898B8B1282a' , 
-         "ceuro": '0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73'  
+         "cusd": '0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1' , 
+         "ceuro": '0x10c892A6EC43a53E45D0B916B4b7D383B1b78C0F'  
 }
 
-price_oracle = eth.contract(address='0x568547688121AA69bDEB8aEB662C321c5D7B98D0', abi= IPrice_Oracle_Getter)
+price_oracle = eth.contract(address='0x88A4a87eF224D8b1F463708D0CD62b17De593DAd', abi= IPrice_Oracle_Getter)
 
 def get_price_in_celo(coin_name, coin_address):
     return (price_oracle.functions.getAssetPrice(coin_address).call()/ether)
@@ -46,7 +46,7 @@ def get_exchange_rate_in_usd(coin_name, coin_address):
     price_in_celo = get_price_in_celo(coin_name, coin_address)
     return price_in_celo, price_in_celo*cg.get_price(ids='celo', vs_currencies='usd')['celo']['usd']
  
-URL = "http://moola-downstream-api.herokuapp.com/"
+URL = "https://aj-v1-moola-downstream-api.herokuapp.com/"
 
 async def fetch(session, url, params):
     async with session.get(url, params=params) as response:
@@ -76,7 +76,7 @@ def dump_data(api_url, params, method):
     asyncio.run(fetch(URL+api_url, params, method))
 
 def dump_coin_exchange_rate(coinName, network, usd_exchange_rate, celo_exchange_rate, cusd_exchange_rate, ceuro_exchange_rate, block_number):
-    return URL+'set/insert/db_celo_mainnet/tbl_coin_exchange_rate', {'coin_name': coin_dict[coinName], 'network_name': network, 'usd_exchange_rate': usd_exchange_rate, "celo_exchange_rate":celo_exchange_rate, "cusd_exchange_rate":cusd_exchange_rate, "ceuro_exchange_rate":ceuro_exchange_rate, 'agent_id':0, 'block_number': block_number, "block_number__Type": "int"}, 'GET'
+    return URL+'set/insert/db_celo_testnet/tbl_coin_exchange_rate', {'coin_name': coin_dict[coinName], 'network_name': network, 'usd_exchange_rate': usd_exchange_rate, "celo_exchange_rate":celo_exchange_rate, "cusd_exchange_rate":cusd_exchange_rate, "ceuro_exchange_rate":ceuro_exchange_rate, 'agent_id':0, 'block_number': block_number, "block_number__Type": "int"}, 'GET'
 
 
 @sched.scheduled_job('interval', seconds=30)
