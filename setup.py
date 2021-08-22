@@ -10,6 +10,9 @@ setuptools.setup(
         "requests==2.24.0",
         "web3==5.12.0",
         "pycoingecko==2.0.0",
+        "aiohttp==3.7.4",
+        "asyncio==3.4.3",
+        "APScheduler==3.0.0"   
     ],
     classifiers=[
         "License :: OSI Approved :: Apache License 2.0",
