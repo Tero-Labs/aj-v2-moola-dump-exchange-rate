@@ -7,7 +7,7 @@ import time
 
 # from apscheduler.schedulers.blocking import BlockingScheduler
 
-sched = BlockingScheduler()
+# sched = BlockingScheduler()
 
 ether = 1000000000000000000
 
