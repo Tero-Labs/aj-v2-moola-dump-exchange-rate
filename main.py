@@ -80,7 +80,7 @@ def dump_coin_exchange_rate(coinName, network, usd_exchange_rate, celo_exchange_
     return URL+'set/insert/db_celo_testnet/tbl_coin_exchange_rate', {'coin_name': coin_dict[coinName], 'network_name': network, 'usd_exchange_rate': usd_exchange_rate, "celo_exchange_rate":celo_exchange_rate, "cusd_exchange_rate":cusd_exchange_rate, "ceuro_exchange_rate":ceuro_exchange_rate, 'agent_id':0, 'block_number': block_number, "block_number__Type": "int"}, 'GET'
 
 
-@sched.scheduled_job('interval', seconds=30)
+@sched.scheduled_job('interval', minutes=5)
 def timed_job():
     celo_mainnet_latest_block = get_latest_block(helper_w3)
     exchange_rate_reqs = []
@@ -101,7 +101,23 @@ def timed_job():
 
 sched.start()
 
+# def dump_exhcange():
+#     celo_mainnet_latest_block = get_latest_block(helper_w3)
+#     exchange_rate_reqs = []
+#     celo_usd, cusd_usd, ceuro_usd = get_exchange_rate_in_usd("celo", coins_reserve_address["celo"]), get_exchange_rate_in_usd("cusd", coins_reserve_address["cusd"]),get_exchange_rate_in_usd("ceuro", coins_reserve_address["ceuro"])
+#     cusd_in_celo, ceuro_in_celo = get_price_in_celo("cusd", coins_reserve_address["cusd"]), get_price_in_celo("ceuro", coins_reserve_address["ceuro"])
 
+#     url, params, method = dump_coin_exchange_rate('celo', 'celo mainnet',  celo_usd, 1, 1/cusd_in_celo, 1/ceuro_in_celo,celo_mainnet_latest_block)
+#     exchange_rate_reqs.append({"url": url, "params": params, "method": method})
+        
+#     url, params, method = dump_coin_exchange_rate('cusd', 'celo mainnet',  cusd_usd, cusd_in_celo, 1, cusd_in_celo/ceuro_in_celo,celo_mainnet_latest_block)
+#     exchange_rate_reqs.append({"url": url, "params": params, "method": method})
+
+#     url, params, method = dump_coin_exchange_rate('ceuro', 'celo mainnet',  ceuro_usd, ceuro_in_celo, ceuro_in_celo/cusd_in_celo, 1,celo_mainnet_latest_block)
+#     exchange_rate_reqs.append({"url": url, "params": params, "method": method})
+
+   
+#     asyncio.run(fetch_all(exchange_rate_reqs))
 
     
-
+# dump_exhcange()
