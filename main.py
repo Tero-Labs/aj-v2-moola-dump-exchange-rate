@@ -95,7 +95,7 @@ def dump_exhcange():
     asyncio.run(fetch_all(exchange_rate_reqs))
 
 dump_exhcange() 
-while True:
-    time.sleep(240)
-    dump_exhcange()    
+# while True:
+#     time.sleep(240)
+#     dump_exhcange()    
 # dump_exhcange()
