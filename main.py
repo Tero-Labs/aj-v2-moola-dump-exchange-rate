@@ -31,7 +31,6 @@ def get_latest_block(celo_mainnet_web3):
     return int(blocksLatest["number"], 16)    
 
 coins_reserve_address = {
-         "celo": '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
          "cusd": '0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1' , 
          "ceuro": '0x10c892A6EC43a53E45D0B916B4b7D383B1b78C0F'  
 }
@@ -42,7 +41,7 @@ def get_price_in_celo(coin_name, coin_address):
     return (price_oracle.functions.getAssetPrice(coin_address).call()/ether)
 
 
-URL = "https://aj-v1-moola-downstream-api.herokuapp.com/"
+URL = "https://aj-v2-moola-downstream-api.herokuapp.com/"
 
 async def fetch(session, url, params):
     async with session.get(url, params=params) as response:
@@ -82,7 +81,6 @@ def dump_exhcange():
     print("Dumping exchange data...")
     celo_mainnet_latest_block = get_latest_block(helper_w3)
     exchange_rate_reqs = []
-    # celo_usd, cusd_usd, ceuro_usd = get_exchange_rate_in_usd("celo", coins_reserve_address["celo"]), get_exchange_rate_in_usd("cusd", coins_reserve_address["cusd"]),get_exchange_rate_in_usd("ceuro", coins_reserve_address["ceuro"])
     cusd_in_celo, ceuro_in_celo = get_price_in_celo("cusd", coins_reserve_address["cusd"]), get_price_in_celo("ceuro", coins_reserve_address["ceuro"])
 
     url, params, method = dump_coin_exchange_rate('celo', 'celo mainnet', 1, 1/cusd_in_celo, 1/ceuro_in_celo, celo_mainnet_latest_block)
