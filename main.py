@@ -71,8 +71,8 @@ def dump_data(api_url, params, method):
     print(URL+api_url)
     asyncio.run(fetch(URL+api_url, params, method))
 
-def dump_coin_exchange_rate(coinName, network, celo_exchange_rate, cusd_exchange_rate, ceuro_exchange_rate, block_number):
-    return URL+'set/insert/db_celo_testnet/tbl_coin_exchange_rate', {'coin_name': coin_dict[coinName], 'network_name': network, "celo_exchange_rate":celo_exchange_rate, "cusd_exchange_rate":cusd_exchange_rate, "ceuro_exchange_rate":ceuro_exchange_rate, 'agent_id':0, 'block_number': block_number, "block_number__Type": "int"}, 'GET'
+def dump_coin_exchange_rate(coinName, network ,celo_exchange_rate, cusd_exchange_rate, ceuro_exchange_rate, block_number):
+    return URL+'set/insert/db_celo_testnet/tbl_coin_exchange_rate', {'coin_name': coin_dict[coinName], 'network_name': network, 'usd_exchange_rate': cusd_exchange_rate, "celo_exchange_rate":celo_exchange_rate, "cusd_exchange_rate":cusd_exchange_rate, "ceuro_exchange_rate":ceuro_exchange_rate, 'agent_id':0, 'block_number': block_number, "block_number__Type": "int"}, 'GET'
 
 
 
